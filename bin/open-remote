@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "open-remote"
+
+# modname by jeremy warner
+# easily rename groups of file with ruby regex.
+
+OpenRemote.new.run(ARGV)
+
