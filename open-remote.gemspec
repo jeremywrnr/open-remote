@@ -6,8 +6,8 @@ require "or-version"
 Gem::Specification.new do |g|
   g.name        = "open-remote"
   g.date        = "2016-01-10"
-  g.version     = OpenRemote::Version
-  s.platform    = Gem::Platform::RUBY
+  g.version     = OpenRemote::VERSION
+  g.platform    = Gem::Platform::RUBY
   g.summary     = "open a git repo's remote from a terminal."
   g.description = "open a git repo's remote host in your browser, from terminal."
 
@@ -21,7 +21,7 @@ Gem::Specification.new do |g|
   g.add_development_dependency "rspec", "~> 3.3", ">= 3.3.2"
 
   g.files       = ["lib/open-remote.rb"]
-  k.require_path = 'lib'
+  g.require_path = 'lib'
   g.executables = ["open-remote"]
 end
 
