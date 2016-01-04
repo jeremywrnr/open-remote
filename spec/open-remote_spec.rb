@@ -7,7 +7,7 @@ describe OpenRemote do
     OpenRemote.new.run(str.split)
   end
 
-  it "should pass rspec test" do
+  it "should pass a basic rspec test" do
     expect(run "hi").to eq true
   end
 end
