@@ -1,12 +1,14 @@
-task :default  => :spec
+lib = File.expand_path("../lib/", __FILE__)
+$:.unshift lib unless $:.include?(lib)
 
-require_relative "./lib/open-remote.rb"
+require "open-remote"
+
+task :default  => :spec
 
 # gem name, version
 g = "open-remote"
 v = OpenRemote::VERSION
 
-require "rake"
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec) do |rake|
   rake.rspec_opts = "--color --format documentation"

@@ -1,6 +1,6 @@
 # open-remotes parsing and opening
 
-require_relative "version"
+require "or-version"
 
 class OpenRemote
   def pexit(sys, msg)

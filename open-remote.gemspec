@@ -1,7 +1,7 @@
 lib = File.expand_path("../lib/", __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require "open-remote/version"
+require "or-version"
 
 Gem::Specification.new do |g|
   g.name        = "open-remote"
