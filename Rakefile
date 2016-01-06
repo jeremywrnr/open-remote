@@ -1,21 +1,30 @@
-# load open-remote files straight into ruby path
+task :default  => :spec
+
+# Load open-remote files straight into ruby path
 lib = File.expand_path("../lib/", __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require "open-remote"
-
-task :default  => :spec
-
 # gem name, version
 g = "open-remote"
+require "open-remote"
 v = OpenRemote::Version
 
+
+# Testing
+#
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec) do |rake|
   rake.rspec_opts = "--color --format documentation"
   rake.verbose = true
 end
 
+task :dev do
+  sh 'filewatcher "**/*.rb" "clear && rake"'
+end
+
+
+# Gem management
+#
 task :build do
 	sh "gem build #{g}.gemspec"
 	sh "gem install ./#{g}-#{v}.gem"
@@ -29,7 +38,35 @@ task :push => [:clean, :build] do
 	sh "gem push #{g}-#{v}.gem"
 end
 
-task :dev do
-  sh 'filewatcher "**/*.rb" "clear && rake"'
+
+# Documentation
+#
+require 'rdoc/task'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "git-up #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+task :man do
+  require 'tempfile'
+
+  markdown = File.read("README.md")
+  markdown.gsub!(/^!\[(.+)\]\(.*\)/, '    \1')
+
+  Tempfile.open('README') do |f|
+    f.write(markdown)
+    f.flush
+    sh "ronn --pipe --roff #{f.path} > man/git-up.1"
+  end
+end
+
+task :html do
+  sh "rm -rf html"
+  sh "mkdir html"
+  sh "ronn --pipe --html --style=toc README.md > html/index.html"
 end
 
