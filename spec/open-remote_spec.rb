@@ -22,5 +22,14 @@ describe OpenRemote do
     expect(run "--version").to eq vers
     expect(run "-v").to eq vers
   end
+
+  it "should not crash with no args" do
+    run "bit even more"
+    run "test"
+  end
+
+  it "should not crash with args" do
+    run ""
+  end
 end
 

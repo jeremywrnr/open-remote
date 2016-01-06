@@ -72,7 +72,7 @@ class << OpenRemote::Browser
       ssh_to_https hb, url
 
     else # unknown, return a generic link
-      hb + url
+      raise "Malformed remote url: " + url
     end
   end
 

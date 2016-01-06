@@ -4,13 +4,17 @@ require "or-version"
 require "or-browser"
 
 class OpenRemote
-  include OpenRemote::Browser
+  extend OpenRemote::Browser
+
+  def initialize
+    #@repo = grit
+  end
 
   def run(args)
     arg = args.shift
     case arg
     when nil # open first remote
-      browse remotes.first
+      Browser.browse remotes
 
     when "--help", "-h"
       puts OpenRemote::Help
@@ -19,21 +23,25 @@ class OpenRemote
       puts OpenRemote::Version
 
     else # cross check against remotes
-      browse remotes(arg).first
+      Browser.browse remotes(arg)
     end
   end
 
-  # todo get git remotes using grit
-  def remotes(search = "*")
-    remotes = []
-    remotes.select { |remote| search.match remote }
+  def remotes(search = /.*/)
+    # todo get git remotes using grit
+    remotes = ['https://github.com/jeremywrnr/booker.git']
+    remote = remotes.find { |remote| search.match remote }
+
+    raise "No remotes found that match #{search}" if remote.nil?
+
+    remote
   end
 end
 
 
 # large constant strings
 
-OpenRemote::Help = <<-EOS
+OpenRemote::Help = <<-HELP
 open-remote - git remote opening tool.
 
 `git open-remote` opens the first remote.
@@ -47,5 +55,5 @@ to open a specific remote, specify the host:
 
 Tested against github, bitbucket, and heroku repos.
 
-EOS
+HELP
 
