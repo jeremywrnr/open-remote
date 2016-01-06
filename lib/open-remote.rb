@@ -8,13 +8,17 @@ class OpenRemote
     exit sys
   end
 
-  # get user command
+  # execute user command
   def run(args)
-    if args.empty?
-      puts HELP_BANNER
-    else
-      puts args
+    arg = args.shift
+    case arg
+    when nil
+    when "--help", "-h"
+      puts OpenRemote::Help
+    when "--version", "-v"
+    else # cross check against remotes
     end
+
     true
   end
 end
@@ -22,7 +26,7 @@ end
 
 # large constant strings
 
-HELP_BANNER = <<-EOS
+OpenRemote::Help = <<-EOS
 open-remote - git remote opening tool.
 
 `git open-remote` opens the first remote.

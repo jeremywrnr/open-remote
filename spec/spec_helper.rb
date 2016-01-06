@@ -1,5 +1,5 @@
 require_relative "../lib/open-remote.rb"
 
-# mute in testing
-def puts(*x) end
+# testing sys output
+def puts(*x) x end
 

@@ -7,7 +7,7 @@ task :default  => :spec
 
 # gem name, version
 g = "open-remote"
-v = OpenRemote::VERSION
+v = OpenRemote::Version
 
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new(:spec) do |rake|

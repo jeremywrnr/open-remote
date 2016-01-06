@@ -5,7 +5,7 @@ require "or-version"
 
 Gem::Specification.new do |g|
   g.name        = "open-remote"
-  g.version     = OpenRemote::VERSION
+  g.version     = OpenRemote::Version
   g.platform    = Gem::Platform::RUBY
   g.date        = Time.now.strftime("%Y-%m-%d")
   g.summary     = "open a git repo's remote from your terminal."

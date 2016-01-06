@@ -1,4 +1,6 @@
+# universal version tracking
+
 class OpenRemote
-  VERSION = "0.1"
+  Version = "0.1"
 end
 
