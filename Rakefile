@@ -1,3 +1,4 @@
+# load open-remote files straight into ruby path
 lib = File.expand_path("../lib/", __FILE__)
 $:.unshift lib unless $:.include?(lib)
 

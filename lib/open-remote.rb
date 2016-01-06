@@ -1,25 +1,29 @@
 # open-remotes parsing and opening
 
 require "or-version"
+require "or-browser"
 
 class OpenRemote
-  def pexit(sys, msg)
-    puts msg
-    exit sys
-  end
-
-  # execute user command
   def run(args)
     arg = args.shift
     case arg
-    when nil
+    when nil # open first listed remote
+      # todo
     when "--help", "-h"
       puts OpenRemote::Help
     when "--version", "-v"
+      puts OpenRemote::Version
     else # cross check against remotes
+      # todo
     end
+  end
 
-    true
+  def remotes
+    # todo
+  end
+
+  def opener
+    # todo - extend browser functionality
   end
 end
 

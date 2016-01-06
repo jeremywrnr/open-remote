@@ -11,10 +11,6 @@ describe OpenRemote do
     # todo
   end
 
-  it "should pass a basic rspec test" do
-    expect(run "hi").to eq true
-  end
-
   it "should show OpenRemote help" do
     help = OpenRemote::Help
     expect(run "--help").to eq help
