@@ -3,14 +3,12 @@
 require "spec_helper"
 
 describe OpenRemote::Browser do
-  class OpenRemote # spoof OS, sys
-    def Browser.open(x) puts x end
-
+  class OpenRemote # spoof OS
     def OS.mac?() true end
   end
 
   def run(str)
-    OpenRemote::Browser.browse(str)
+    OpenRemote::Browser.prepare(str)
   end
 
   it "should have correct browser cmd" do
@@ -33,10 +31,11 @@ describe OpenRemote::Browser do
     expect(run remote).to eq website
   end
 
-  # todo - get an example in/out
-  it "should work on heroku remotes" do
-    remote = "heroku"
-    website = "break?"
+  # url: https://git.heroku.com/codepilot.git
+  # out: https://dashboard.heroku.com/apps/<app>
+  it "should open heroku remotes" do
+    remote = "https://git.heroku.com/app.git"
+    website = "https://dashboard.heroku.com/apps/app"
     expect(run remote).to eq website
   end
 end

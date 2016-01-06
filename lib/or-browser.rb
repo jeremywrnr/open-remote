@@ -62,10 +62,11 @@ class << OpenRemote::Browser
   #
   def prepare(url)
     hb = "https://" # https base url
-    if /^https/.match(url) # is website, return w/o .git ending
-      url.sub(/\.git$/, "")
+    if /^https:\/\/git\.heroku/.match(url) # is heroku, change to app
+      https_to_app hb + "dashboard.heroku.com/apps/", url
 
-    elsif /^git.*heroku/.match(url) # is heroku, change to app
+    elsif /^https/.match(url) # is website, return w/o .git ending
+      url.sub(/\.git$/, "")
 
     elsif /^git/.match(url) # is ssh link, change to website
       ssh_to_https hb, url
@@ -83,6 +84,14 @@ class << OpenRemote::Browser
     user_repo = info.partition(":").last
     user_repo.sub!(/\.git$/, "")
     "#{base}#{host}/#{user_repo}"
+  end
+
+  # url: https://git.heroku.com/app.git
+  # out: https://dashboard.heroku.com/apps/<app>
+  def https_to_app(base, url)
+    app = url.partition(".com/").last
+    app.sub!(/\.git$/, "")
+    base + app
   end
 end
 
