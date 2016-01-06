@@ -39,7 +39,15 @@ will all open the current repository's bitbucket remote in the browser.
 the original idea for this came from my friend [charlie][cel] who initially
 provided me with a simple git alias that would do the same, but it only worked
 for repos that were https and was not platform independent. I was also inspired
-by the [git-up][gup] ruby gem in how seamlessly it integrated with git.
+by the [git-up][gup] ruby gem in how seamlessly it integrated with git. Here is
+the original git alias (made to work on osx), which charlie wrote (plop it in
+your .gitconfig, if you don't want to install a ruby gem to open your git
+remotes):
+
+```
+[alias]
+    open-remote = "!open $(git remote -v $@ | grep -o 'http\\S*' | head -1); :"
+```
 
 [gup]:
 [cel]:
