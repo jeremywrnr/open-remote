@@ -49,3 +49,8 @@ by the [git-up][gup] ruby gem in how seamlessly it integrated with git.
     bundle || gem install bundler
     rake
 
+## todos
+
+- adding ronn docgen, with rake
+- activitaing travisci tracking
+
