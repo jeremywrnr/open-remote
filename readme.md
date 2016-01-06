@@ -7,8 +7,14 @@ open-remote
 [![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
 
 
-open-remote - git remote opening tool.
+open-remote - a simple git remote opening tool. works for:
 
+    - github
+    - bitbucket
+    - heroku
+
+if there are other git hosting websites that you would like to add, either let
+me know or make a pull request with the augmentation for that host.
 
 ## setup
 
@@ -19,21 +25,27 @@ open-remote - git remote opening tool.
     git open-remote
 
 opens the first git remote. to open a specific remote, specify some part (or
-all)  of the host name. for example:
+all) of the host name. for example:
 
     git open-remote bit
     git open-remote bucket
     git open-remote bitbucket
 
-will all open the bitbucket remote in the browser.
+will all open the current repository's bitbucket remote in the browser.
 
 
 ## about
 
+the original idea for this came from my friend [charlie][cel] who initially
+provided me with a simple git alias that would do the same, but it only worked
+for repos that were https and was not platform independent. I was also inspired
+by the [git-up][gup] ruby gem in how seamlessly it integrated with git.
+
+[gup]:
+[cel]:
+
 ## testing
 
-    bundle
+    bundle || gem install bundler
     rake
-
-## todos
 
