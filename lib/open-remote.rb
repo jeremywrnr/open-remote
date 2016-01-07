@@ -1,20 +1,17 @@
 # open-remotes parsing and opening
 
+require "colored"
 require "or-version"
 require "or-browser"
 
 class OpenRemote
   extend OpenRemote::Browser
 
-  def initialize
-    #@repo = grit
-  end
-
   def run(args)
     arg = args.shift
     case arg
     when nil # open first remote
-      Browser.browse remotes
+      Browser.browse remote
 
     when "--help", "-h"
       puts OpenRemote::Help
@@ -22,19 +19,22 @@ class OpenRemote
     when "--version", "-v"
       puts OpenRemote::Version
 
-    else # cross check against remotes
-      Browser.browse remotes(arg)
+    else # check against remotes
+      Browser.browse remote(arg)
     end
   end
 
-  def remotes(search = /.*/)
-    # todo get git remotes using grit
-    remotes = ['https://github.com/jeremywrnr/booker.git']
-    remote = remotes.find { |remote| search.match remote }
+  def remote(search = /.*/)
+    remote = remotes.find { |remote| remote.match search }
 
-    raise "No remotes found that match #{search}" if remote.nil?
+    raise "No remotes found that match #{search}. All remotes:\n".green +
+      remotes.join("\n") if remote.nil?
 
     remote
+  end
+
+  def remotes
+    %x{git remote -v}.split("\n").map { |r| r.split[1] }
   end
 end
 

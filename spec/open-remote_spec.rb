@@ -7,8 +7,16 @@ describe OpenRemote do
     OpenRemote.new.run(str.split)
   end
 
-  before "create fake remotes" do
-    # todo
+  class OpenRemote
+    def remotes(*s)
+      %w{https://github.com/user/repo.git
+          git@bitbucket.org:<user>/repo.git
+          https://git.heroku.com/app.git}
+    end
+
+    def Browser::open(url)
+      puts url
+    end
   end
 
   it "should show OpenRemote help" do
@@ -24,12 +32,13 @@ describe OpenRemote do
   end
 
   it "should not crash with no args" do
-    run "bit even more"
-    run "test"
+    run ""
   end
 
   it "should not crash with args" do
-    run ""
+    run "bitbucket"
+    run "github"
+    run "heroku"
   end
 end
 

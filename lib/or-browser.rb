@@ -55,7 +55,8 @@ class << OpenRemote::Browser
   # Make the system call to open up a website
   #
   def open(url)
-    system browser, url
+    puts "Opening: ".green + url
+    system browser + url
   end
 
   # Parse remote to determine whether it is https/ssh, give link
