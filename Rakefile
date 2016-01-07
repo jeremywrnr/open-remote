@@ -50,7 +50,7 @@ task :man do
   Tempfile.open('README') do |f|
     f.write(markdown)
     f.flush
-    sh "ronn --pipe --roff #{f.path} > man/git-open-remote.1"
+    sh "ronn --pipe --roff #{f.path} > man/open-remote.1"
   end
 end
 
