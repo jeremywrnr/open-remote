@@ -16,7 +16,6 @@ Gem::Specification.new do |g|
   g.homepage    = "http://github.com/jeremywrnr/open-remote"
   g.license     = "MIT"
 
-  g.add_dependency "grit"
   g.add_dependency "colored", ">= 1.2"
   g.add_development_dependency "ronn"
   g.add_development_dependency "rspec", "~> 3.3", ">= 3.3.2"
