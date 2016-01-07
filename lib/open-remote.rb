@@ -19,6 +19,12 @@ class OpenRemote
     when "--version", "-v"
       puts OpenRemote::Version
 
+    when "--alias"
+      system "git config --global alias.open '!open-remote'"
+
+    when "--unalias"
+      system "git config --global --unset alias.open"
+
     else # check against remotes
       Browser.browse remote(arg)
     end
