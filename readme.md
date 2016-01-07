@@ -57,8 +57,3 @@ remotes):
     bundle || gem install bundler
     rake
 
-## todos
-
-- adding ronn docgen, with rake
-- activitaing travisci tracking
-
