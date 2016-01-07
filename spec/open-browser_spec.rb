@@ -3,8 +3,10 @@
 require "spec_helper"
 
 describe OpenRemote::Browser do
-  class OpenRemote # spoof OS
-    def OS.mac?() true end
+  module OpenRemote::OS # spoof OS
+    def mac?() false end
+    def dos?() false end
+    def nix?() true end
   end
 
   def run(str)
@@ -12,7 +14,7 @@ describe OpenRemote::Browser do
   end
 
   it "should have correct browser cmd" do
-    expect(OpenRemote::Browser.browser).to eq "open "
+    expect(OpenRemote::Browser.browser).to eq "xdg-open "
   end
 
   # url: https://github.com/<user>/<repo>.git
