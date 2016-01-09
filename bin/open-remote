@@ -2,8 +2,8 @@
 
 require "open-remote"
 
-# modname by jeremy warner
-# easily rename groups of file with ruby regex.
+# open-remote by jeremy warner
+# easily open git repo remotes
 
 OpenRemote.new.run(ARGV)
 
