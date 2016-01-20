@@ -9,6 +9,7 @@ class OpenRemote
 
   def run(args)
     arg = args.shift
+
     case arg
     when nil # open first remote
       Browser.browse remote
@@ -33,10 +34,12 @@ class OpenRemote
   def remote(search = /.*/)
     remote = remotes.find { |remote| remote.match search }
 
-    raise "No remotes found that match #{search}. All remotes:\n".green +
-      remotes.join("\n") if remote.nil?
-
-    remote
+    if remote.nil?
+      puts "No remotes found that match #{search.to_s}. All remotes:\n".green +
+        remotes.join("\n")
+    else
+      remote
+    end
   end
 
   def remotes
@@ -50,13 +53,13 @@ end
 OpenRemote::Help = <<-HELP
 open-remote - git remote opening tool.
 
-`git open-remote` opens the first remote.
+`git open` opens the first listed remote.
 
-to open a specific remote, specify the host:
+to open a particular remote, specify the host:
 
-`git open-remote bit`,
-`git open-remote bucket`,
-`git open-remote bitbucket`,
+`git open bit`,
+`git open bucket`,
+`git open bitbucket`,
   will all open bitbucket remote in the browser.
 
 Tested against github, bitbucket, and heroku repos.
