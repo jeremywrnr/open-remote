@@ -37,6 +37,7 @@ class OpenRemote
     if remote.nil?
       puts "No remotes found that match #{search.to_s}. All remotes:\n".green +
         remotes.join("\n")
+      exit 1
     else
       remote
     end
