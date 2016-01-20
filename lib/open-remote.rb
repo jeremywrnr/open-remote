@@ -44,7 +44,7 @@ class OpenRemote
   end
 
   def remotes
-    %x{git remote -v}.split("\n").map { |r| r.split[1] }
+    %x{git remote -v}.split("\n").map { |r| r.split[1] }.uniq
   end
 end
 
