@@ -11,8 +11,8 @@ Gem::Specification.new do |g|
   g.version     = OpenRemote::Version
   g.platform    = Gem::Platform::RUBY
   g.date        = Time.now.strftime("%Y-%m-%d")
-  g.summary     = "open a git repo's remote from your terminal."
-  g.description = "open a git repo's web remote from your terminal."
+  g.summary     = "open a git repo's remote from your terminal (git open)."
+  g.description = "open a git repo's web remote from your terminal, a la 'git open'."
   g.homepage    = "http://github.com/jeremywrnr/open-remote"
   g.license     = "MIT"
 
