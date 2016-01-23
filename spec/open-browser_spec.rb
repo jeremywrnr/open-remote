@@ -31,6 +31,10 @@ describe OpenRemote::Browser do
     remote = "git@bitbucket.org:user/repo.git"
     website = "https://bitbucket.org/user/repo"
     expect(run remote).to eq website
+
+    remote = "ssh://git@bitbucket.org:user/repo.git"
+    website = "https://bitbucket.org/user/repo"
+    expect(run remote).to eq website
   end
 
   # url: https://git.heroku.com/codepilot.git
