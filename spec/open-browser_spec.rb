@@ -4,9 +4,7 @@ require "spec_helper"
 
 describe OpenRemote::Browser do
   module OpenRemote::OS # spoof OS
-    def mac?() false end
-    def dos?() false end
-    def nix?() true end
+    def os_name() "nix" end
   end
 
   def run(str)

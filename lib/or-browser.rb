@@ -2,27 +2,13 @@
 #
 module OpenRemote::OS
   def os_name
-    if mac?
+    if (/darwin/ =~ RUBY_PLATFORM) != nil
       "mac"
-    elsif dos?
+    elsif (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
       "dos"
-    elsif nix?
-      "nix"
     else
-      raise "Unknown operating system."
+      "nix"
     end
-  end
-
-  def mac?
-    (/darwin/ =~ RUBY_PLATFORM) != nil
-  end
-
-  def dos?
-    (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
-  end
-
-  def nix?
-    not (dos? || mac?)
   end
 end
 
