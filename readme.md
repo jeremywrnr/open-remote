@@ -14,6 +14,8 @@ tested and works well for:
     - github
     - bitbucket
     - heroku
+    - TODO: gems (from checking gemspec)
+    - TODO: travis (from checking .travis.yml)
 
 if there are other git hosting websites that you would like to use this with,
 either let me know or make a pull request with the augmentation for that host.
