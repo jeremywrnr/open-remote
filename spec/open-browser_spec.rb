@@ -25,8 +25,16 @@ describe OpenRemote::Browser do
 
   # url: git@bitbucket.org:<user>/<repo>.git
   # out: https://bitbucket.org/<user>/<repo>
-  it "should open git remotes" do
+  it "should open git@ remotes" do
     remote = "git@bitbucket.org:user/repo.git"
+    website = "https://bitbucket.org/user/repo"
+    expect(run remote).to eq website
+  end
+
+  # url: git://github.com/user/repo.git
+  # out: https://github.com/user/repo
+  it "should open git: remotes" do
+    remote = "git://github.com/koke/grit.git"
     website = "https://bitbucket.org/user/repo"
     expect(run remote).to eq website
   end
