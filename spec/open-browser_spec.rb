@@ -25,12 +25,16 @@ describe OpenRemote::Browser do
 
   # url: git@bitbucket.org:<user>/<repo>.git
   # out: https://bitbucket.org/<user>/<repo>
-  it "should open ssh git remotes" do
+  it "should open git remotes" do
     remote = "git@bitbucket.org:user/repo.git"
     website = "https://bitbucket.org/user/repo"
     expect(run remote).to eq website
+  end
 
-    remote = "ssh://git@bitbucket.org:user/repo.git"
+  # url: ssh://git@bitbucket.org:<user>/<repo>.git
+  # out: https://bitbucket.org/<user>/<repo>
+  it "should open ssh remotes" do
+    remote = "ssh://git@bitbucket.org/user/repo.git"
     website = "https://bitbucket.org/user/repo"
     expect(run remote).to eq website
   end
