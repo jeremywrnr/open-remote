@@ -55,8 +55,11 @@ class << OpenRemote::Browser
     elsif /^https/.match(url) # is website, return w/o .git ending
       url.sub(/\.git$/, "")
 
-    elsif /^git/.match(url) # is ssh link, change to website
-      git_to_https hb, url
+    elsif /^git@/.match(url) # git remote w/ @
+      git_at_to_https hb, url
+
+    elsif /^git:/.match(url) # git remote w/ :
+      git_colon_to_https hb, url
 
     elsif /^ssh/.match(url) # is ssh link, change to website
       ssh_to_https hb, url
@@ -67,9 +70,9 @@ class << OpenRemote::Browser
   end
 
 
-  # url: git@host:user/repo.git
-  # out: https://host/user/repo
-  def git_to_https(base, url)
+  # Helper transformations
+  #
+  def git_at_to_https(base, url)
     info = url.partition("@").last
     host = info.partition(":").first
     user_repo = info.partition(":").last
@@ -77,20 +80,22 @@ class << OpenRemote::Browser
     "#{base}#{host}/#{user_repo}"
   end
 
-  # url: ssh://git@host/user/repo.git
-  # out: https://host/user/repo
+  def git_colon_to_https(base, url)
+    info = url.partition("://").last
+    info.sub!(/\.git$/, "")
+    base << info
+  end
+
   def ssh_to_https(base, url)
     info = url.partition("@").last
     info.sub!(/\.git$/, "")
-    base + info
+    base << info
   end
 
-  # url: https://git.heroku.com/app.git
-  # out: https://dashboard.heroku.com/apps/<app>
   def https_to_app(base, url)
     app = url.partition(".com/").last
     app.sub!(/\.git$/, "")
-    base + app
+    base << app
   end
 end
 

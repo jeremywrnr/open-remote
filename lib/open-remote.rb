@@ -35,7 +35,7 @@ class OpenRemote
     remote = remotes.find { |remote| remote.match search }
 
     if remote.nil?
-      puts "No remotes found that match #{search.to_s}. All remotes:\n".green +
+      puts "No remotes found that match #{search.to_s.red}. All remotes:\n" +
         remotes.join("\n")
       exit 1
     else
