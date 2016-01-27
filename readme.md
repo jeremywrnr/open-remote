@@ -14,8 +14,6 @@ tested and works well for:
     - github
     - bitbucket
     - heroku
-    - TODO: gems (from checking gemspec)
-    - TODO: travis (from checking .travis.yml)
 
 if there are other git hosting websites that you would like to use this with,
 either let me know or make a pull request with the augmentation for that host.
@@ -55,8 +53,8 @@ provided me with a simple git alias that would do the same, but it only worked
 for repos that were https and was not platform independent. I was also inspired
 by the [git-up][gup] ruby gem in how seamlessly it integrated with git. Here is
 the original git alias (made to work on osx), which charlie wrote (plop it in
-your .gitconfig, if you don't want to install a ruby gem to open your git
-remotes):
+your .gitconfig, if you don't want to install a ruby gem to open most of your
+git remotes):
 
 ```
 [alias]
@@ -69,6 +67,6 @@ remotes):
 
 ## testing
 
-    bundle || gem install bundler
-    rake
+    bundle || gem install bundler && bundle
+    rake # running open-remote's tests
 
