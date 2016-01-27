@@ -26,16 +26,16 @@ end
 # Gem management
 #
 task :build do
-	sh "gem build #{g}.gemspec"
-	sh "gem install ./#{g}-#{v}.gem"
+  sh "gem build #{g}.gemspec"
+  sh "gem install ./#{g}-#{v}.gem"
 end
 
 task :clean do
-	sh "rm -fv *.gem"
+  sh "rm -fv *.gem"
 end
 
 task :push => [:clean, :build] do
-	sh "gem push #{g}-#{v}.gem"
+  sh "gem push #{g}-#{v}.gem"
 end
 
 
