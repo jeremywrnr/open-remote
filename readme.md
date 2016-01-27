@@ -2,9 +2,10 @@ open-remote
 ===========
 
 
+[![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
 [![Gem Version](https://badge.fury.io/rb/open-remote.svg)](https://badge.fury.io/rb/open-remote)
 [![Build Status](https://travis-ci.org/jeremywrnr/open-remote.svg?branch=master)](https://travis-ci.org/jeremywrnr/open-remote)
-[![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
+[![Code Climate](https://codeclimate.com/github/jeremywrnr/open-remote/badges/gpa.svg)](https://codeclimate.com/github/jeremywrnr/open-remote)
 
 
 open-remote - a simple git remote opening tool.
