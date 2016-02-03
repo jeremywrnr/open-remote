@@ -31,7 +31,17 @@ class OpenRemote
     end
   end
 
+  def no_repo?
+    `git status 2>&1`.split("\n").first ==
+      "fatal: Not a git repository (or any of the parent directories): .git"
+  end
+
   def remote(search = /.*/)
+    if no_repo?
+      puts "Not currently in a git repository.".red
+      exit 1
+    end
+
     remote = remotes.find { |remote| remote.match search }
 
     if remote.nil?
