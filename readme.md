@@ -71,3 +71,8 @@ git remotes):
     bundle || gem install bundler && bundle
     rake # running open-remote's tests
 
+## todo
+
+    add support for ssb clients:
+    "ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"
+

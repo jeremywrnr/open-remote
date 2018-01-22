@@ -26,6 +26,9 @@ class OpenRemote
     when "--unalias"
       system "git config --global --unset alias.open"
 
+    when "--output", "-o"
+      puts Browser.prepare remote
+
     else # check against remotes
       Browser.browse remote(arg)
     end
@@ -42,14 +45,14 @@ class OpenRemote
       exit 1
     end
 
-    remote = remotes.find { |remote| remote.match search }
+    remote_site = remotes.find { |remote| remote.match search }
 
-    if remote.nil?
+    if remote_site.nil?
       puts "No remotes found that match #{search.to_s.red}. All remotes:\n" +
         remotes.join("\n")
       exit 1
     else
-      remote
+      remote_site
     end
   end
 
@@ -62,18 +65,25 @@ end
 # large constant strings
 
 OpenRemote::Help = <<-HELP
-open-remote - git remote opening tool.
+A tool for git remote opening tool. Open the remote url:
 
-`git open` opens the first listed remote.
+    git open
 
-to open a particular remote, specify the host:
+Options:
 
-`git open bit`,
-`git open bucket`,
-`git open bitbucket`,
-  will all open bitbucket remote in the browser.
+    -h, --help    show help
+    -v, --version show open-remote version
+    -o, --output  show output without opening
+    --alias       add open-remote to git alias
+    --unalias     remove open-remote from git
 
+To open a particular remote, specify the host:
+
+    git open bit
+    git open bucket
+    git open bitbucket
+
+These all open bitbucket's remote url in the browser.
 Tested against github, bitbucket, and heroku repos.
-
 HELP
 
