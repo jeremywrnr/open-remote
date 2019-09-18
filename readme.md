@@ -37,15 +37,17 @@ removing the alias, if you don't want it anymore:
 
     git open
 
-opens the first git remote. to open a specific remote, specify some part (or
-all) of the host name. for example:
+opens the first listed git remote. to open a specific remote, specify some
+of the remote or host name. for example:
 
     git open bit
     git open bucket
     git open bitbucket
 
 will all open the current repository's bitbucket remote in the browser.
+additionally, you can use the remote name to specify which URL to open:
 
+    git open origin
 
 ## about
 

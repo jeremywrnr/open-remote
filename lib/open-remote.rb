@@ -45,19 +45,22 @@ class OpenRemote
       exit 1
     end
 
-    remote_site = remotes.find { |remote| remote.match search }
+    remote_site = remotes.find { |r| r.each_value.any? { |d| d.match search } }
 
     if remote_site.nil?
       puts "No remotes found that match #{search.to_s.red}. All remotes:\n" +
         remotes.join("\n")
       exit 1
     else
-      remote_site
+      remote_site[:url]
     end
   end
 
   def remotes
-    %x{git remote -v}.split("\n").map { |r| r.split[1] }.uniq
+    %x{git remote -v}.split("\n").map { |r| {
+      :remote => r.split[0],
+      :url => r.split[1],
+    } }.uniq
   end
 end
 

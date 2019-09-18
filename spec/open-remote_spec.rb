@@ -9,9 +9,11 @@ describe OpenRemote do
 
   class OpenRemote
     def remotes(*s)
-      %w{https://github.com/user/repo.git
-          git@bitbucket.org:<user>/repo.git
-          https://git.heroku.com/app.git}
+      [
+        {:remote => 'origin', :url => 'https://github.com/user/repo.git'},
+        {:remote => 'bucket', :url => 'git@bitbucket.org:<user>/repo.git'},
+        {:remote => 'heroku', :url => 'https://git.heroku.com/app.git'},
+      ]
     end
 
     def Browser::open(url)
@@ -35,10 +37,25 @@ describe OpenRemote do
     run ""
   end
 
-  it "should not crash with args" do
+  it "should not crash with valid args" do
     run "bitbucket"
     run "github"
     run "heroku"
+  end
+
+  it "should not crash with invalid args" do
+    run "fake_input"
+    run "test 123 *!"
+  end
+
+  it "should match valid repos" do
+    remotes = OpenRemote.new.remotes
+      .map {|r| r[:url] }
+      .map {|r| OpenRemote::Browser.prepare r}
+    expect(run "user/repo").to eq remotes[0]
+    expect(run "origin").to eq remotes[0]
+    expect(run "bucket").to eq remotes[1]
+    expect(run "heroku").to eq remotes[2]
   end
 end
 
