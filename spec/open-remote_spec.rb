@@ -3,22 +3,29 @@
 require "spec_helper"
 
 describe OpenRemote do
-  def run(str)
-    OpenRemote.new.run(str.split)
-  end
-
   class OpenRemote
     def remotes(*s)
       [
         {:remote => 'origin', :url => 'https://github.com/user/repo.git'},
         {:remote => 'bucket', :url => 'git@bitbucket.org:<user>/repo.git'},
         {:remote => 'heroku', :url => 'https://git.heroku.com/app.git'},
+        {:remote => 'CAPS', :url => 'https://code.org/MINE/repo.git'},
       ]
     end
 
     def Browser::open(url)
       puts url
     end
+  end
+
+  def run(str)
+    OpenRemote.new.run(str.split)
+  end
+
+  before do
+    @remotes = OpenRemote.new.remotes
+      .map {|r| r[:url] }
+      .map {|r| OpenRemote::Browser.prepare r }
   end
 
   it "should show OpenRemote help" do
@@ -43,19 +50,21 @@ describe OpenRemote do
     run "heroku"
   end
 
-  it "should not crash with invalid args" do
-    run "fake_input"
-    run "test 123 *!"
+  it "should match flexible case urls" do
+    expect(run "caps").to eq @remotes[3]
+    expect(run "mine").to eq @remotes[3]
   end
 
   it "should match valid repos" do
-    remotes = OpenRemote.new.remotes
-      .map {|r| r[:url] }
-      .map {|r| OpenRemote::Browser.prepare r}
-    expect(run "user/repo").to eq remotes[0]
-    expect(run "origin").to eq remotes[0]
-    expect(run "bucket").to eq remotes[1]
-    expect(run "heroku").to eq remotes[2]
+    expect(run "user/repo").to eq @remotes[0]
+    expect(run "origin").to eq @remotes[0]
+    expect(run "bucket").to eq @remotes[1]
+    expect(run "heroku").to eq @remotes[2]
+  end
+
+  it "should crash with invalid args" do
+    run "fake_input"
+    run "test 123 *!"
   end
 end
 
