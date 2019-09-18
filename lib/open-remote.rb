@@ -45,7 +45,7 @@ class OpenRemote
       exit 1
     end
 
-    remote_site = remotes.find { |r| r.each_value.any? { |d| d.match search } }
+    remote_site = remotes.find { |r| r.each_value.any? { |d| d.downcase.match search } }
 
     if remote_site.nil?
       puts "No remotes found that match #{search.to_s.red}. All remotes:\n" +
@@ -57,10 +57,10 @@ class OpenRemote
   end
 
   def remotes
-    %x{git remote -v}.split("\n").map { |r| {
+    %x{git remote -v}.split("\n").map {|r| {
       :remote => r.split[0],
       :url => r.split[1],
-    } }.uniq
+    }}.uniq
   end
 end
 
