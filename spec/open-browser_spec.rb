@@ -15,6 +15,14 @@ describe OpenRemote::Browser do
     expect(OpenRemote::Browser.browser).to eq "xdg-open "
   end
 
+  # url: https://bitbucket.org/<user>/<repo.com>
+  # out: https://bitbucket.org/<user>/<repo.com>
+  it "should open repos with website names" do
+    remote = "https://github.com/berkeleyhci/hci.berkeley.edu"
+    website = "https://github.com/berkeleyhci/hci.berkeley.edu"
+    expect(run remote).to eq website
+  end
+
   # url: https://git.heroku.com/codepilot.git
   # out: https://dashboard.heroku.com/apps/<app>
   it "should open heroku remotes" do
@@ -38,6 +46,7 @@ describe OpenRemote::Browser do
     website = "https://bitbucket.org/user/repo"
     expect(run remote).to eq website
   end
+
   # url: git://github.com/user/repo.git
   # out: https://github.com/user/repo
   it "should open git: remotes" do
@@ -51,14 +60,6 @@ describe OpenRemote::Browser do
   it "should open ssh remotes" do
     remote = "ssh://git@bitbucket.org/user/repo.git"
     website = "https://bitbucket.org/user/repo"
-    expect(run remote).to eq website
-  end
-
-  # url: https://bitbucket.org/<user>/<repo.com>
-  # out: https://bitbucket.org/<user>/<repo.com>
-  it "should open repos with website names" do
-    remote = "https://github.com/berkeleyhci/hci.berkeley.edu"
-    website = "https://github.com/berkeleyhci/hci.berkeley.edu"
     expect(run remote).to eq website
   end
 end

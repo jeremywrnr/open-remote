@@ -20,6 +20,7 @@ Gem::Specification.new do |g|
   g.add_development_dependency "ronn"
   g.add_development_dependency "rake"
   g.add_development_dependency "rspec"
+  g.add_development_dependency "prettier"
 
   g.files        = Dir.glob("{bin,lib,man}/**/*") + %w(readme.md)
   g.executables  = Dir.glob("bin/*").map(&File.method(:basename))
