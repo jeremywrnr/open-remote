@@ -3,7 +3,7 @@ open-remote
 
 
 [![Gem Version](https://badge.fury.io/rb/open-remote.svg)](https://badge.fury.io/rb/open-remote)
-[![Build Status](https://travis-ci.org/jeremywrnr/open-remote.svg?branch=master)](https://travis-ci.org/jeremywrnr/open-remote)
+[![Build Status](https://travis-ci.org/jeremywrnr/open-remote.svg?branch=main)](https://travis-ci.org/jeremywrnr/open-remote)
 [![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
 
 
