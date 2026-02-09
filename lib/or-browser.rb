@@ -2,16 +2,15 @@
 #
 module OpenRemote::OS
   def os_name
-    if (/darwin/ =~ RUBY_PLATFORM) != nil
+    if /darwin/.match?(RUBY_PLATFORM)
       "mac"
-    elsif (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    elsif /cygwin|mswin|mingw|bccwin|wince|emx/.match?(RUBY_PLATFORM)
       "dos"
     else
       "nix"
     end
   end
 end
-
 
 # Web browser opening commands
 #
@@ -22,7 +21,7 @@ class << OpenRemote::Browser
   # Generate and open approprate website from ssh/git link
   #
   def browse(remote)
-    open prepare remote
+    open_url prepare remote
   end
 
   # Return the right command for opening a website from the terminal
@@ -40,35 +39,43 @@ class << OpenRemote::Browser
 
   # Make the system call to open up a website
   #
-  def open(url)
+  def open_url(url)
     puts "Opening: ".green + url
-    system browser + url
+
+    # Use spawn for better control - detach browser process and suppress its output
+    # This allows the script to exit cleanly while hiding verbose GTK warnings
+    begin
+      pid = spawn("#{browser}#{url}", out: "/dev/null", err: "/dev/null")
+      Process.detach(pid)
+    rescue Errno::ENOENT
+      puts "Error: Could not find browser command '#{browser.strip}'".red
+      exit 1
+    rescue => e
+      puts "Error opening browser: #{e.message}".red
+      exit 1
+    end
   end
 
   # Parse remote to determine whether it is https/ssh, give link
   #
   def prepare(url)
     hb = "https://" # https base url
-    if /^https:\/\/git\.heroku/.match(url) # is heroku, change to app
-      https_to_app hb + "dashboard.heroku.com/apps/", url
-
-    elsif /^https/.match(url) # is website, return w/o .git ending
+    if /^https/.match?(url) # is website, return w/o .git ending
       url.sub(/\.git$/, "")
 
-    elsif /^git@/.match(url) # git remote w/ @
+    elsif /^git@/.match?(url) # git remote w/ @
       git_at_to_https hb, url
 
-    elsif /^git:/.match(url) # git remote w/ :
+    elsif /^git:/.match?(url) # git remote w/ :
       git_colon_to_https hb, url
 
-    elsif /^ssh/.match(url) # is ssh link, change to website
+    elsif /^ssh/.match?(url) # is ssh link, change to website
       ssh_to_https hb, url
 
     else # unknown, return a generic link
       raise "Malformed remote url: " + url
     end
   end
-
 
   # Helper transformations
   #
@@ -91,11 +98,4 @@ class << OpenRemote::Browser
     info.sub!(/\.git$/, "")
     base << info
   end
-
-  def https_to_app(base, url)
-    app = url.partition(".com/").last
-    app.sub!(/\.git$/, "")
-    base << app
-  end
 end
-

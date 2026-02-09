@@ -15,10 +15,10 @@ class OpenRemote
       Browser.browse remote
 
     when "--help", "-h"
-      puts OpenRemote::Help
+      puts OpenRemote::HELP
 
     when "--version", "-v"
-      puts OpenRemote::Version
+      puts OpenRemote::VERSION
 
     when "--alias"
       system "git config --global alias.open '!open-remote'"
@@ -57,36 +57,36 @@ class OpenRemote
   end
 
   def remotes
-    %x{git remote -v}.split("\n").map {|r| {
-      :remote => r.split[0],
-      :url => r.split[1],
-    }}.uniq
+    `git remote -v`.split("\n").map { |r|
+      {
+        remote: r.split[0],
+        url: r.split[1]
+      }
+    }.uniq
   end
 end
 
-
 # large constant strings
 
-OpenRemote::Help = <<-HELP
-A tool for git remote opening tool. Open the remote url:
-
-    git open
-
-Options:
-
-    -h, --help    show help
-    -v, --version show open-remote version
-    -o, --output  show output without opening
-    --alias       add open-remote to git alias
-    --unalias     remove open-remote from git
-
-To open a particular remote, specify the host:
-
-    git open bit
-    git open bucket
-    git open bitbucket
-
-These all open bitbucket's remote url in the browser.
-Tested against github, bitbucket, and heroku repos.
+OpenRemote::HELP = <<~HELP
+  A tool for git remote opening tool. Open the remote url:
+  
+      git open
+  
+  Options:
+  
+      -h, --help    show help
+      -v, --version show open-remote version
+      -o, --output  show output without opening
+      --alias       add open-remote to git alias
+      --unalias     remove open-remote from git
+  
+  To open a particular remote, specify the host:
+  
+      git open bit
+      git open bucket
+      git open bitbucket
+  
+  These all open bitbucket's remote url in the browser.
+  Tested against github, bitbucket, and gitea repos.
 HELP
-

@@ -3,7 +3,6 @@ open-remote
 
 
 [![Gem Version](https://badge.fury.io/rb/open-remote.svg)](https://badge.fury.io/rb/open-remote)
-[![Build Status](https://app.travis-ci.com/jeremywrnr/open-remote.svg)](https://app.travis-ci.com/jeremywrnr/open-remote)
 [![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
 
 
@@ -13,7 +12,7 @@ tested and works well for:
 
     - github
     - bitbucket
-    - heroku
+    - gitea
 
 if there are other git hosting websites that you would like to use this with,
 either let me know or make a pull request with the augmentation for that host.

@@ -1,8 +1,6 @@
-require_relative "../lib/open-remote.rb"
-
-#require "codeclimate-test-reporter"
-#CodeClimate::TestReporter.start
+require_relative "../lib/open-remote"
 
 # testing sys output
-def puts(*x) x.join end
-
+def puts(*x)
+  x.join
+end
