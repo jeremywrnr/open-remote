@@ -5,8 +5,9 @@ open-remote
 [![Gem Version](https://badge.fury.io/rb/open-remote.svg)](https://badge.fury.io/rb/open-remote)
 [![MIT](https://img.shields.io/npm/l/alt.svg?style=flat)](http://jeremywrnr.com/mit-license)
 
-
 open-remote - a simple git remote opening tool.
+
+**Latest Release:** [v1.0.0](CHANGELOG.md) - See [CHANGELOG.md](CHANGELOG.md) for full release notes
 
 tested and works well for:
 
@@ -66,10 +67,18 @@ git remotes):
 [gup]:https://github.com/aanand/git-up
 
 
-## testing
+## development
+
+### testing
 
     bundle || gem install bundler && bundle
-    rake # running open-remote's tests
+    rake              # run test suite
+    rake format       # auto-fix code formatting
+    rake format_check # check code formatting
+
+### changelog
+
+see [CHANGELOG.md](CHANGELOG.md) for detailed release history and changes.
 
 ## todo
 
