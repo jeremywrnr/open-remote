@@ -89,4 +89,7 @@ OpenRemote::HELP = <<~HELP
   
   These all open bitbucket's remote url in the browser.
   Tested against github, bitbucket, and gitea repos.
+
+  Secure scuttlebutt (ssb://) remotes are passed to your
+  local ssb client instead of being opened as a website.
 HELP

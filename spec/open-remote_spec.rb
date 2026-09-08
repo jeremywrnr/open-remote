@@ -9,7 +9,8 @@ describe OpenRemote do
         {remote: "origin", url: "https://github.com/user/repo.git"},
         {remote: "bucket", url: "git@bitbucket.org:<user>/repo.git"},
         {remote: "gitea", url: "https://gitea.example.com/user/repo.git"},
-        {remote: "CAPS", url: "https://code.org/MINE/repo.git"}
+        {remote: "CAPS", url: "https://code.org/MINE/repo.git"},
+        {remote: "ssb", url: "ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"}
       ]
     end
 
@@ -48,6 +49,7 @@ describe OpenRemote do
     run "bitbucket"
     run "github"
     run "gitea"
+    run "ssb"
   end
 
   it "should match flexible case urls" do
@@ -60,6 +62,11 @@ describe OpenRemote do
     expect(run("origin")).to eq @remotes[0]
     expect(run("bucket")).to eq @remotes[1]
     expect(run("gitea")).to eq @remotes[2]
+    expect(run("ssb")).to eq @remotes[4]
+  end
+
+  it "should match ssb remotes by message id" do
+    expect(run("sha256")).to eq @remotes[4]
   end
 
   it "should exit with invalid args" do

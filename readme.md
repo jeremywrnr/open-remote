@@ -14,6 +14,7 @@ tested and works well for:
     - github
     - bitbucket
     - gitea
+    - secure scuttlebutt (ssb)
 
 if there are other git hosting websites that you would like to use this with,
 either let me know or make a pull request with the augmentation for that host.
@@ -47,6 +48,20 @@ will all open the current repository's bitbucket remote in the browser.
 additionally, you can use the remote name to specify which URL to open:
 
     git open origin
+
+### secure scuttlebutt
+
+[secure scuttlebutt][ssb] repos have no web host - the repo is a message on
+the feed, so there is nothing to translate to https. those remotes:
+
+    ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256
+
+are handed to your system's registered `ssb://` handler (patchwork,
+manyverse, etc) instead. `git-ssb://` remotes are normalized to `ssb://`
+first. if nothing is registered for the scheme, your desktop will say so -
+open-remote does not guess at a web gateway.
+
+[ssb]: https://en.wikipedia.org/wiki/Secure_Scuttlebutt
 
 ## about
 
