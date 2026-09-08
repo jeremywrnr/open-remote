@@ -7,8 +7,6 @@ open-remote
 
 open-remote - a simple git remote opening tool.
 
-**Latest Release:** [v1.0.0](CHANGELOG.md) - See [CHANGELOG.md](CHANGELOG.md) for full release notes
-
 tested and works well for:
 
     - github
@@ -61,8 +59,6 @@ manyverse, etc) instead. `git-ssb://` remotes are normalized to `ssb://`
 first. if nothing is registered for the scheme, your desktop will say so -
 open-remote does not guess at a web gateway.
 
-[ssb]: https://en.wikipedia.org/wiki/Secure_Scuttlebutt
-
 ## about
 
 the original idea for this came from my friend [charlie][cel] who initially
@@ -95,8 +91,5 @@ git remotes):
 
 see [CHANGELOG.md](CHANGELOG.md) for detailed release history and changes.
 
-## todo
-
-    add support for ssb clients:
-    "ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"
+[ssb]: https://en.wikipedia.org/wiki/Secure_Scuttlebutt
 
