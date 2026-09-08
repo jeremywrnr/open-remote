@@ -45,7 +45,7 @@ class << OpenRemote::Browser
     # Use spawn for better control - detach browser process and suppress its output
     # This allows the script to exit cleanly while hiding verbose GTK warnings
     begin
-      pid = spawn("#{browser}#{url}", out: "/dev/null", err: "/dev/null")
+      pid = spawn(browser.strip, url, out: "/dev/null", err: "/dev/null")
       Process.detach(pid)
     rescue Errno::ENOENT
       puts "Error: Could not find browser command '#{browser.strip}'".red
@@ -72,6 +72,9 @@ class << OpenRemote::Browser
     elsif /^ssh/.match?(url) # is ssh link, change to website
       ssh_to_https hb, url
 
+    elsif /^(git-)?ssb:/.match?(url) # secure scuttlebutt, hand to ssb client
+      ssb_uri url
+
     else # unknown, return a generic link
       raise "Malformed remote url: " + url
     end
@@ -97,5 +100,12 @@ class << OpenRemote::Browser
     info = url.partition("@").last
     info.sub!(/\.git$/, "")
     base << info
+  end
+
+  # ssb remotes have no web host - normalize to ssb:// so the registered
+  # scuttlebutt client (patchwork, manyverse, etc) picks the uri up
+  #
+  def ssb_uri(url)
+    url.sub(/^git-ssb:/, "ssb:")
   end
 end

@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Secure scuttlebutt support: `ssb://` remotes are passed through to the
+  system's registered ssb client rather than rewritten to https
+- `git-ssb://` remotes are normalized to `ssb://`
+
+### Fixed
+- The url is passed to the opener as an argv entry instead of being
+  interpolated into a shell string, so base64 ssb message ids (and any
+  other url containing shell metacharacters) survive intact
+
 ## [1.0.0] - 2026-02-08
 
 ### Added

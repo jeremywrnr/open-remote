@@ -72,4 +72,25 @@ describe OpenRemote::Browser do
     website = "https://bitbucket.org/user/repo"
     expect(run(remote)).to eq website
   end
+
+  # url: ssb://%<msgid>.sha256
+  # out: ssb://%<msgid>.sha256
+  it "should hand ssb remotes to the ssb client" do
+    remote = "ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"
+    expect(run(remote)).to eq remote
+  end
+
+  # url: git-ssb://%<msgid>.sha256
+  # out: ssb://%<msgid>.sha256
+  it "should normalize git-ssb remotes to ssb" do
+    remote = "git-ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"
+    uri = "ssb://%3HY71B7em4rZwMwz76yHIJZA1zo5BMBLd7Msh8LRFHI=.sha256"
+    expect(run(remote)).to eq uri
+  end
+
+  # ssb ids are base64 - the +/= must survive untouched
+  it "should preserve base64 ssb message ids" do
+    remote = "ssb://%a+b/c0Z9zK1QwErTyUiOpAsDfGhJkLzXcVbNmQwErTy=.sha256"
+    expect(run(remote)).to eq remote
+  end
 end
